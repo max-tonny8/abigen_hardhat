@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.write = exports.read = exports.mkdir = void 0;
 const promises_1 = __importDefault(require("fs/promises"));
+const fs_1 = require("fs");
 async function mkdir(path) {
-    const dirStats = await promises_1.default.stat(path);
-    if (!dirStats.isDirectory()) {
+    if (!(0, fs_1.existsSync)(path)) {
         await promises_1.default.mkdir(path);
     }
 }

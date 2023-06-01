@@ -7,21 +7,23 @@ const filesystem_util_1 = require("./utils/filesystem.util");
     const { config } = hre;
     const { abigen } = config;
     hre.config.abigen = {
-        outDir: abigen.outDir || "abi",
-        inDir: abigen.inDir || "contracts",
-        contracts: abigen.contracts || ["*"],
-        space: abigen.space || 2,
+        outDir: abigen?.outDir || "abi",
+        inDir: abigen?.inDir || "contracts",
+        contracts: abigen?.contracts || ["*"],
+        space: abigen?.space || 2,
     };
 });
 (0, config_1.task)("abigen", async (args, hre) => {
     const { config, artifacts } = hre;
     const { abigen } = config;
-    const { outDir, inDir, space } = abigen;
+    const { outDir, inDir, contracts, space } = abigen;
     await (0, filesystem_util_1.mkdir)(outDir);
     const contractNames = await (0, contracts_util_1.getContracts)(artifacts, inDir);
     for await (const contractName of contractNames) {
-        const artifact = await artifacts.readArtifact(contractName);
-        const abi = JSON.stringify(artifact.abi, null, space);
-        await (0, filesystem_util_1.write)(`${outDir}/${contractName}.json`, abi);
+        if (contracts.includes("*") || contracts.includes(contractName)) {
+            const artifact = await artifacts.readArtifact(contractName);
+            const abi = JSON.stringify(artifact.abi, null, space);
+            await (0, filesystem_util_1.write)(`${outDir}/${contractName}.json`, abi);
+        }
     }
 });
