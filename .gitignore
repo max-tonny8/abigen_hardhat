@@ -1,0 +1,31 @@
+# Node.js files
+node_modules
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+cache
+artifacts
+
+
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+
+# Hardhat files
+cache
+artifacts
+
+# Local env files
+.env
+.env.local
+.env.dev.local
+
+# System Files
+.DS_Store
+Thumbs.db

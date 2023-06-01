@@ -1,0 +1,37 @@
+{
+  "name": "hardhat-abigen",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/nazarkhatsko/hardhat-abigen",
+  "description": "Plugin for Hardhat to generate ABI files",
+  "author": "nazarkhatsko",
+  "license": "MIT",
+  "homepage": "https://github.com/nazarkhatsko/hardhat-abigen",
+  "keywords": [
+    "npm",
+    "typescript",
+    "ethereum",
+    "smart-contracts",
+    "watch",
+    "npm-package",
+    "abi",
+    "solidity",
+    "evm",
+    "hardhat",
+    "hardhat-plugin"
+  ],
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\""
+  },
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "hardhat": "^2.14.1",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
