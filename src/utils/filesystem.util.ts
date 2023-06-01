@@ -1,8 +1,8 @@
 import fs from "fs/promises";
+import { existsSync } from "fs";
 
 export async function mkdir(path: string): Promise<void> {
-  const dirStats = await fs.stat(path);
-  if (!dirStats.isDirectory()) {
+  if (!existsSync(path)) {
     await fs.mkdir(path);
   }
 }
