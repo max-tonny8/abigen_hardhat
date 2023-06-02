@@ -1,11 +1,12 @@
 import { extendEnvironment, task } from "hardhat/config";
-import { getContracts } from "./utils/contracts.util";
-import { mkdir, write } from "./utils/filesystem.util";
+import { getContracts } from "./contracts";
+import { mkdir, write } from "./filesystem";
 
 interface ApigenConfig {
   outDir: string;
   inDir: string;
-  contracts: string[];
+  includeContracts: string[];
+  excludeContracts: string[];
   space: number;
   autoCompile: boolean;
 }
@@ -27,7 +28,8 @@ extendEnvironment(hre => {
   hre.config.abigen = {
     outDir: abigen?.outDir || "abi",
     inDir: abigen?.inDir || "contracts",
-    contracts: abigen?.contracts || ["*"],
+    includeContracts: abigen?.includeContracts || ["*"],
+    excludeContracts: abigen?.excludeContracts || [],
     space: abigen?.space || 2,
     autoCompile: abigen?.autoCompile || true
   };
@@ -36,19 +38,20 @@ extendEnvironment(hre => {
 task("abigen", async (args, hre) => {
   const { config, artifacts } = hre;
   const { abigen } = config;
-  const { outDir, inDir, contracts, space, autoCompile } = abigen;
+  const { outDir, inDir, includeContracts, excludeContracts, space, autoCompile } = abigen;
 
   if (autoCompile) {
     await hre.run("compile");
   }
 
+  const contractNames = (await getContracts(artifacts, inDir))
+    .filter(contractName => includeContracts.includes("*") || includeContracts.includes(contractName))
+    .filter(contractName => !excludeContracts.includes("*") && !excludeContracts.includes(contractName));
+
   await mkdir(outDir);
-  const contractNames = await getContracts(artifacts, inDir);
   for await (const contractName of contractNames) {
-    if (contracts.includes("*") || contracts.includes(contractName)) {
-      const artifact = await artifacts.readArtifact(contractName);
-      const abi = JSON.stringify(artifact.abi, null, space);
-      await write(`${outDir}/${contractName}.json`, abi);
-    }
+    const { abi } = await artifacts.readArtifact(contractName);
+    const data = JSON.stringify(abi, null, space);
+    await write(`${outDir}/${contractName}.json`, data);
   }
 });

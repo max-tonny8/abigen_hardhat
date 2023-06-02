@@ -1,6 +1,6 @@
 # Hardhat Abigen Plugin
 
-This repository contains a plugin for Hardhat, a popular Ethereum development environment. The `Hardhat Abigen` plugin generates ABI (Application Binary Interface) files from smart contracts, making it easier to interact with contracts on the Ethereum blockchain.
+This repository contains a plugin for Hardhat, a popular Ethereum development environment. The Hardhat Abigen Plugin generates ABI (Application Binary Interface) files from smart contracts, making it easier to interact with contracts on the Ethereum blockchain.
 
 ## Installation
 
@@ -28,16 +28,42 @@ This will enable the necessary functionality provided by the plugin.
 
 ## Configuration
 
-The Hardhat-Abigen plugin supports a configuration file that allows you to customize its behavior. Create a file named `hardhat.config.js` in the root directory of your project and add the following configuration options:
+The Hardhat-Abigen plugin supports a configuration file that allows you to customize its behavior. Create a file named `hardhat.config.js` or `hardhat.config.ts` in the root directory of your project and add the following configuration options:
+
+### JavaScript
+
+```javascript
+module.exports = {
+  // ...other configuration options...
+
+  abigen: {
+    outDir: "abi",       // The output directory for generated ABI files (default: "abi")
+    inDir: "contracts",  // The input directory containing your contract files (default: "contracts")
+    contracts: ["*"],    // An array of contract filenames or patterns to generate ABIs for (default: ["*"])
+    space: 2,            // The number of spaces to use for indentation in the generated ABIs (default: 2)
+    autoCompile: true    // Whether to automatically compile contracts before generating ABIs (default: true)
+  },
+};
+```
+
+### TypeScript
 
 ```typescript
-{
-  outDir: string,      // The output directory for generated ABI files (default: "abi")
-  inDir: string,       // The input directory containing your contract files (default: "contracts")
-  contracts: string[], // An array of contract filenames or patterns to generate ABIs for (default: ["*"])
-  space: number,       // The number of spaces to use for indentation in the generated ABIs (default: 2)
-  autoCompile: boolean // Whether to automatically compile contracts before generating ABIs (default: true)
-}
+import { HardhatUserConfig } from "hardhat/config";
+
+const config: HardhatUserConfig = {
+  // ...other configuration options...
+
+  abigen: {
+    outDir: "abi",       // The output directory for generated ABI files (default: "abi")
+    inDir: "contracts",  // The input directory containing your contract files (default: "contracts")
+    contracts: ["*"],    // An array of contract filenames or patterns to generate ABIs for (default: ["*"])
+    space: 2,            // The number of spaces to use for indentation in the generated ABIs (default: 2)
+    autoCompile: true    // Whether to automatically compile contracts before generating ABIs (default: true)
+  },
+};
+
+export default config;
 ```
 
 Make sure to replace the values with your desired configuration options.
