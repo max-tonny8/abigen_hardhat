@@ -37,11 +37,12 @@ module.exports = {
   // ...other configuration options...
 
   abigen: {
-    outDir: "abi",       // The output directory for generated ABI files (default: "abi")
-    inDir: "contracts",  // The input directory containing your contract files (default: "contracts")
-    contracts: ["*"],    // An array of contract filenames or patterns to generate ABIs for (default: ["*"])
-    space: 2,            // The number of spaces to use for indentation in the generated ABIs (default: 2)
-    autoCompile: true    // Whether to automatically compile contracts before generating ABIs (default: true)
+    outDir: "abi",            // The output directory for generated ABI files (default: "abi")
+    inDir: "contracts",       // The input directory containing your contract files (default: "contracts")
+    includeContracts: ["*"],  // An array of contract patterns to include in the generate ABIs (default: ["*"])
+    excludeContracts: [],     // An array of contract patterns to exclude from the generate ABIs (default: [])
+    space: 2,                 // The number of spaces to use for indentation in the generated ABIs (default: 2)
+    autoCompile: true         // Whether to automatically compile contracts before generating ABIs (default: true)
   },
 };
 ```
@@ -55,11 +56,12 @@ const config: HardhatUserConfig = {
   // ...other configuration options...
 
   abigen: {
-    outDir: "abi",       // The output directory for generated ABI files (default: "abi")
-    inDir: "contracts",  // The input directory containing your contract files (default: "contracts")
-    contracts: ["*"],    // An array of contract filenames or patterns to generate ABIs for (default: ["*"])
-    space: 2,            // The number of spaces to use for indentation in the generated ABIs (default: 2)
-    autoCompile: true    // Whether to automatically compile contracts before generating ABIs (default: true)
+    outDir: "abi",            // The output directory for generated ABI files (default: "abi")
+    inDir: "contracts",       // The input directory containing your contract files (default: "contracts")
+    includeContracts: ["*"],  // An array of contract patterns to include in the generate ABIs (default: ["*"])
+    excludeContracts: [],     // An array of contract patterns to exclude from the generate ABIs (default: [])
+    space: 2,                 // The number of spaces to use for indentation in the generated ABIs (default: 2)
+    autoCompile: true         // Whether to automatically compile contracts before generating ABIs (default: true)
   },
 };
 
