@@ -11,12 +11,16 @@ const filesystem_util_1 = require("./utils/filesystem.util");
         inDir: abigen?.inDir || "contracts",
         contracts: abigen?.contracts || ["*"],
         space: abigen?.space || 2,
+        autoCompile: abigen?.autoCompile || true
     };
 });
 (0, config_1.task)("abigen", async (args, hre) => {
     const { config, artifacts } = hre;
     const { abigen } = config;
-    const { outDir, inDir, contracts, space } = abigen;
+    const { outDir, inDir, contracts, space, autoCompile } = abigen;
+    if (autoCompile) {
+        await hre.run("compile");
+    }
     await (0, filesystem_util_1.mkdir)(outDir);
     const contractNames = await (0, contracts_util_1.getContracts)(artifacts, inDir);
     for await (const contractName of contractNames) {

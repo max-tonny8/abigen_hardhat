@@ -3,6 +3,7 @@ interface ApigenConfig {
     inDir: string;
     contracts: string[];
     space: number;
+    autoCompile: boolean;
 }
 declare module "hardhat/types/config" {
     interface HardhatUserConfig {

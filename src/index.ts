@@ -7,6 +7,7 @@ interface ApigenConfig {
   inDir: string;
   contracts: string[];
   space: number;
+  autoCompile: boolean;
 }
 
 declare module "hardhat/types/config" {
@@ -28,13 +29,18 @@ extendEnvironment(hre => {
     inDir: abigen?.inDir || "contracts",
     contracts: abigen?.contracts || ["*"],
     space: abigen?.space || 2,
+    autoCompile: abigen?.autoCompile || true
   };
 });
 
 task("abigen", async (args, hre) => {
   const { config, artifacts } = hre;
   const { abigen } = config;
-  const { outDir, inDir, contracts, space } = abigen;
+  const { outDir, inDir, contracts, space, autoCompile } = abigen;
+
+  if (autoCompile) {
+    await hre.run("compile");
+  }
 
   await mkdir(outDir);
   const contractNames = await getContracts(artifacts, inDir);
