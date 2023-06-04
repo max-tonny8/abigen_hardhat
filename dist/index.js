@@ -7,12 +7,12 @@ const filesystem_1 = require("./filesystem");
     const { config } = hre;
     const { abigen } = config;
     hre.config.abigen = {
-        outDir: abigen?.outDir || "abi",
-        inDir: abigen?.inDir || "contracts",
-        includeContracts: abigen?.includeContracts || ["*"],
-        excludeContracts: abigen?.excludeContracts || [],
-        space: abigen?.space || 2,
-        autoCompile: abigen?.autoCompile || true
+        outDir: abigen?.outDir ?? "abi",
+        inDir: abigen?.inDir ?? "contracts",
+        includeContracts: abigen?.includeContracts ?? ["*"],
+        excludeContracts: abigen?.excludeContracts ?? [],
+        space: abigen?.space ?? 2,
+        autoCompile: abigen?.autoCompile ?? true,
     };
 });
 (0, config_1.task)("abigen", async (args, hre) => {
