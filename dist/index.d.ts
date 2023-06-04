@@ -1,7 +1,8 @@
 interface ApigenConfig {
     outDir: string;
     inDir: string;
-    contracts: string[];
+    includeContracts: string[];
+    excludeContracts: string[];
     space: number;
     autoCompile: boolean;
 }

@@ -31,7 +31,7 @@ extendEnvironment(hre => {
     includeContracts: abigen?.includeContracts || ["*"],
     excludeContracts: abigen?.excludeContracts || [],
     space: abigen?.space || 2,
-    autoCompile: abigen?.autoCompile || true
+    autoCompile: abigen?.autoCompile || true,
   };
 });
 

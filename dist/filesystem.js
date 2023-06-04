@@ -13,10 +13,10 @@ async function mkdir(path) {
 }
 exports.mkdir = mkdir;
 async function read(path) {
-    return promises_1.default.readFile(path, "utf8");
+    return await promises_1.default.readFile(path, "utf8");
 }
 exports.read = read;
 async function write(path, data) {
-    promises_1.default.writeFile(path, data, { flag: "w" });
+    await promises_1.default.writeFile(path, data, { flag: "w" });
 }
 exports.write = write;
